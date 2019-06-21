@@ -1,0 +1,10 @@
+.chat-content{display: block;}
+.chat-content>div{height: 100%;}
+
+.left{background-color: lavender;}
+.count-online{border-bottom: 1px solid rgb(61, 136, 206);}
+.right{background-color: mintcream;}
+.chatbox{background-color: white;}
+.user-login{border-bottom: 1px solid yellowgreen;}
+.my-chat{float: right;text-align: start; color:white;background-color: rgb(29, 73, 109);display: inline-block;margin-top:1em;max-width: 45%;}
+.their-chat{float: left; text-align: justify ;background-color: whitesmoke;margin-top: 1em;max-width: 45%;}
