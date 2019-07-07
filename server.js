@@ -23,7 +23,7 @@ io.on('connection', function(socket){
     }
     else{                         //Don't have user
         socket.username = data;
-        user.push(data);
+        user.unshift(data);
         socket.emit('LoginSuccess', user);
         socket.broadcast.emit('NewUserConnected', data);
         console.log('Success ' + socket.username);

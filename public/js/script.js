@@ -11,7 +11,7 @@ $.fn.pressEnter = function (fn) {
 };
 
 $(document).ready(function () {
-    console.log(CreateTheirChat("Hi", "Hello"));
+    // console.log(CreateTheirChat("Hi", "Hello"));
     $('#chat-content').hide();
     $('.alert').hide();
     $('#txtUsername').val('');
@@ -33,10 +33,24 @@ $(document).ready(function () {
             });
             socket.on('LoginSuccess', function (data) {
                 console.table(data);
+                socket.username = username;
                 $('#login').hide();
                 $('#chat-name').html(username);
                 $('#countOnline').html(data.length);
                 $('#chat-content').show();
+
+                socket.on('UserChange', function (data){
+                    $('#countOnline').html(data.length);
+                    $('.list-online > tbody').html('');
+                    data.forEach(element => {
+                        if(element != socket.username){
+                            $('.list-online > tbody').append(CreateUserChat(element, false));
+                        }else{
+                            $('.list-online > tbody').append(CreateUserChat(socket.username, true));
+                        }
+                    });
+                    // alert('hi');
+                });
             });
             
         }
@@ -64,9 +78,18 @@ $(document).ready(function () {
         }, 2000);
     });
 
+    // Send message
+    // $('#btnSendMessage').click(function(){
+    //     //Create my chat and insert into it
+    //     var content = $('#txtMessage').val();
+    //     $('.chatbox').append(CreateMyChat(content));
+
+    //     //Send to another user
+    // });
 });
 
-function CreateUserChat(name, info=false){
+function CreateUserChat(name, info){
+    console.log(info);
     var row = document.createElement("tr");
     if(info){
         row.className="table-info";
